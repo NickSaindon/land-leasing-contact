@@ -78,7 +78,7 @@ export default function Home() {
                                 rules={{
                                   required: true,
                                   minLength: 2,
-                                  pattern: /^[a-zA-Z\s]*$/,
+                                  pattern: /^[\u0E00-\u0E7Fa-zA-Z\s]*$/,
                                 }}
                                 render={({ field }) => (
                                   <input 
@@ -173,7 +173,7 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  pattern: /^[\w ]*[^\W_][\w ]*$/
+                                  pattern: /^[\u0E00-\u0E7Fa-zA-Z0-9\s]*$/
                                 }}
                                 render={({ field }) => (
                                   <input 
@@ -204,7 +204,7 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  pattern: /^[\w ]*[^\W_][\w ]*$/
+                                  pattern: /^[\u0E00-\u0E7Fa-zA-Z\s]*$/
                                 }}
                                 render={({ field }) => (
                                   <input 
@@ -235,7 +235,7 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  pattern: /^[\w ]*[^\W_][\w ]*$/
+                                  pattern: /^[\u0E00-\u0E7Fa-zA-Z\s]*$/
                                 }}
                                 render={({ field }) => (
                                   <input 
@@ -266,7 +266,7 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  pattern: /^[\w ]*[^\W_][\w ]*$/
+                                  pattern: /^[\u0E00-\u0E7Fa-zA-Z\s]*$/
                                 }}
                                 render={({ field }) => (
                                   <input 
@@ -297,7 +297,8 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  minLength: 5,
+                                  maxLength: 6,
+                                  pattern: /^[0-9]*$/
                                 }}
                                 render={({ field }) => (
                                   <input 
@@ -310,13 +311,9 @@ export default function Home() {
                                 )}
                               />
                               <div className="invalid-feedback">
-                                {
-                                  errors.zipCode
-                                    ? errors.zipCode.type === 'minLength'
-                                      ? 'รหัสไปรษณีย์ต้องมีมากกว่า 5 หมายเลข'
-                                      : 'รหัสไปรษณีย์เป็นสิ่งจำเป็น'
-                                    : ''
-                                }
+                                {errors.zipCode && errors.zipCode.type === "required" ? 'รหัสไปรษณีย์เป็นสิ่งจำเป็น' : ''}
+                                {errors.zipCode && errors.zipCode.type === "maxLength" ? 'ไม่เกิน 6 หมายเลข' : ''}
+                                {errors.zipCode && errors.zipCode.type === "pattern" ? 'ตัวเลขเท่านั้น' : ''}
                               </div>                            
                             </div>
                           </div>
