@@ -20,7 +20,8 @@
     "react-dom": "18.1.0",
     "react-hook-form": "^7.31.2",
     "react-number-format": "^4.9.3",
-    "sass": "^1.52.1"
+    "sass": "^1.52.1",
+    "sharp": "^0.30.6"
   },
   "devDependencies": {
     "eslint": "8.16.0",
