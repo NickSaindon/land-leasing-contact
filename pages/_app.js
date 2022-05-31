@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-
-import '../styles/globals.scss'
+import '../styles/globals.scss';
+import ToastContainer from '../components/ToastContainer';
+import { ToastProvider } from '../context/ToastContext';
 
 function MyApp({ Component, pageProps }) {
 
@@ -9,8 +10,10 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-
-            <Component {...pageProps} />
+      <ToastProvider>
+        <Component {...pageProps} />
+        <ToastContainer />
+      </ToastProvider>
 
   )
 }

@@ -50,7 +50,7 @@ export default async (req, res) => {
                               <td width="330" style="width: 33%;"></td>
                               <td width="300" style="width: 30%;" align="center">
                                 <a href="#" target="_blank" border="0" style="border: none; display: block; outline: none; text-decoration: none; line-height: 60px; height: 60px; color: #ffffff; font-family: Verdana, Geneva, sans-serif;  -webkit-text-size-adjust:none;">
-                                  <img src="/images/Remedy_Export_Logo.png" alt="Remedy Export" width="100" height="100" border="0" style="border: none; display: block; -ms-interpolation-mode: bicubic;">
+                                  <img src="https://github.com/NickSaindon/land-leasing-contact/blob/main/public/images/Remedy_Export_Logo.png?raw=true" alt="Remedy Export" width="100" height="100" border="0" style="border: none; display: block; -ms-interpolation-mode: bicubic;">
                                 </a>
                               </td>
                             </tr>

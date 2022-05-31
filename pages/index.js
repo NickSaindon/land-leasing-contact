@@ -1,11 +1,12 @@
 import axios from 'axios';
-import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Controller, useForm } from 'react-hook-form';
 import NumberFormat from "react-number-format";
+import { useToast } from '../hooks/useToast';
 
 export default function Home() {
+  const toast = useToast();
   const { handleSubmit, control, formState: { errors }, reset } = useForm();
 
   async function onSubmitForm(values) {
@@ -20,7 +21,13 @@ export default function Home() {
 
     try {
       const response = await axios(config);
-      console.log(response);
+      if (response.status == 200) {
+        reset();
+        toast(
+          'success',
+          'Thank you for contacting us, we will be in touch soon.'
+        );
+      }
     } catch(err) {
       console.log(err);
     }
@@ -82,7 +89,7 @@ export default function Home() {
                                       ? 'ชื่อต้องยาวเกิน 1 ตัวอักษร'
                                         ? errors.name.type === 'pattern'
                                       : 'ต้องระบุชื่อ'
-                                        : 'No numbers or special characters allowed'
+                                        : 'ไม่อนุญาตให้ใช้ตัวเลขหรือสัญลักษณ์พิเศษ'
                                     : ''
                                 }
                               </div>
@@ -158,7 +165,6 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  minLength: 3,
                                   pattern: /^[\w ]*[^\W_][\w ]*$/
                                 }}
                                 render={({ field }) => (
@@ -174,8 +180,8 @@ export default function Home() {
                               <div className="invalid-feedback">
                                 {
                                   errors.address
-                                    ? errors.address.type === 'minLength'
-                                      ? 'ที่อยู่ต้องยาวเกิน 2 ตัวอักษร'
+                                    ? errors.address.type === 'pattern'
+                                      ? 'ไม่อนุญาตให้ใช้ตัวเลขหรือสัญลักษณ์พิเศษ'
                                       : 'ต้องระบุที่อยู่'
                                     : ''
                                 }
@@ -190,7 +196,7 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  minLength: 3,
+                                  pattern: /^[\w ]*[^\W_][\w ]*$/
                                 }}
                                 render={({ field }) => (
                                   <input 
@@ -205,8 +211,8 @@ export default function Home() {
                               <div className="invalid-feedback">
                                 {
                                   errors.subdistrict
-                                    ? errors.subdistrict.type === 'minLength'
-                                      ? 'ตำบลต้องยาวเกิน 2 ตัวอักษร'
+                                    ? errors.subdistrict.type === 'pattern'
+                                      ? 'ไม่อนุญาตให้ใช้ตัวเลขหรือสัญลักษณ์พิเศษ'
                                       : 'ต้องมีตำบล'
                                     : ''
                                 }
@@ -221,7 +227,7 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  minLength: 2,
+                                  pattern: /^[\w ]*[^\W_][\w ]*$/
                                 }}
                                 render={({ field }) => (
                                   <input 
@@ -236,8 +242,8 @@ export default function Home() {
                               <div className="invalid-feedback">
                                 {
                                   errors.district
-                                    ? errors.district.type === 'minLength'
-                                      ? 'อำเภอต้องยาวเกิน 2 ตัวอักษร'
+                                    ? errors.district.type === 'pattern'
+                                      ? 'ไม่อนุญาตให้ใช้ตัวเลขหรือสัญลักษณ์พิเศษ'
                                       : 'อำเภอเป็นสิ่งจำเป็น'
                                     : ''
                                 }
@@ -252,7 +258,7 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  minLength: 2,
+                                  pattern: /^[\w ]*[^\W_][\w ]*$/
                                 }}
                                 render={({ field }) => (
                                   <input 
@@ -267,8 +273,8 @@ export default function Home() {
                               <div className="invalid-feedback">
                                 {
                                   errors.province
-                                    ? errors.province.type === 'minLength'
-                                      ? 'จังหวัดต้องยาวเกิน 2 ตัวอักษร'
+                                    ? errors.province.type === 'pattern'
+                                      ? 'ไม่อนุญาตให้ใช้ตัวเลขหรือสัญลักษณ์พิเศษ'
                                       : 'จังหวัด เป็นสิ่งจำเป็น'
                                     : ''
                                 }
