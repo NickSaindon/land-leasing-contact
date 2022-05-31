@@ -2,12 +2,14 @@ import axios from 'axios';
 import Image from 'next/image'
 import Link from 'next/link'
 import { Controller, useForm } from 'react-hook-form';
-import NumberFormat from "react-number-format";
-import { useToast } from '../hooks/useToast';
+import NumberFormat from "react-number-format"
+import { useToast } from '../hooks/useToast'
+import { useState } from 'react' 
 
 export default function Home() {
   const toast = useToast();
   const { handleSubmit, control, formState: { errors }, reset } = useForm();
+  const [phone, setPhone] = useState("");
 
   async function onSubmitForm(values) {
     let config = {
@@ -18,18 +20,24 @@ export default function Home() {
       },
       data: values,
     };
+    const response = await axios(config);
 
     try {
-      const response = await axios(config);
       if (response.status == 200) {
-        reset();
+        reset()
         toast(
           'success',
-          'Thank you for contacting us, we will be in touch soon.'
+          'ขอขอบคุณที่ติดต่อเรา เราจะติดต่อกลับไปในเร็วๆ นี้'
         );
       }
     } catch(err) {
       console.log(err);
+      if (response.status == 500) {
+        toast(
+          'error',
+          'เกิดข้อผิดพลาดขณะประมวลผลคำขอของคุณ'
+        );
+      }
     }
   }
 
@@ -59,7 +67,7 @@ export default function Home() {
                       <p>
                         บริษัท เรเมดี้ เอ็กซ์ปอร์ต จำกัด เปิดโครงการเช่าที่ดินปลูกกระท่อม 10,000 ไร่ทั่วประเทศสำหรับทำกระท่อม ข้อกำหนดขั้นต่ำคือ 5 ไร่ขึ้นไปเพื่อให้เจ้าของที่ดินมีคุณสมบัติตามโครงการ สัญญาเช่า 10 ปี พร้อมเอกสารกรรมสิทธิ์ที่ดิน รับเช่าเป็นกระท่อมสดกิโลกรัมละ 50 บาท เป็นระยะเวลา 10 ปี 12 เดือน หลังปลูก เมื่อสิ้นสุดสัญญา บริษัท เรเมดี เอ็กซ์ปอร์ตส์ จำกัด จะมอบกระท่อมให้แก่เจ้าของที่ดิน โดยเจ้าของจะจัดการค่าดำเนินการทั้งหมดของกระท่อมหลังสิ้นสุดสัญญา เจ้าของที่ดินขอสงวนสิทธิ์ในการขายกระท่อมให้กับ บริษัท เรมิดี้ เอ๊กซ์ปอร์ตส จำกัด. ในราคากิโลกรัมละ 150 บาท หลังจากหมดสัญญาในเบื้องต้น หากสนใจ โปรดระบุข้อมูลติดต่อด้านล่าง ขอบคุณค่ะ
                       </p>
-                      <form onSubmit={handleSubmit(onSubmitForm)} id="contactForm" name="contactForm" className="contactForm" noValidate>
+                      <form onSubmit={handleSubmit(onSubmitForm, phone, setPhone)} id="contactForm" name="contactForm" className="contactForm" noValidate>
                         <div className="row gy-3">
                           <div className="col-md-12">
                             <div className="form-group">
@@ -135,7 +143,7 @@ export default function Home() {
                                   pattern: /^\(?\b[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4}\b$/
                                   ,
                                 }}
-                                render={({ field: {onChange, name, value} }) => (
+                                render={({ field: {name, onChange = (e) => setPhone(e.target.value), value = phone}}) => (
                                   <NumberFormat
                                     format="(###) ###-####"
                                     name={name}
@@ -154,7 +162,7 @@ export default function Home() {
                                           : 'ต้องระบุหมายเลขโทรศัพท์'
                                         : ''
                                   }
-                              </div>
+                              </div>                         
                             </div>
                           </div>
                           <div className="col-md-12">

@@ -47,12 +47,13 @@ export default async (req, res) => {
                           <tbody >
                             <tr><td colspan="3" height="20"></td></tr>
                             <tr>
-                              <td width="330" style="width: 33%;"></td>
-                              <td width="300" style="width: 30%;" align="center">
-                                <a href="#" target="_blank" border="0" style="border: none; display: block; outline: none; text-decoration: none; line-height: 60px; height: 60px; color: #ffffff; font-family: Verdana, Geneva, sans-serif;  -webkit-text-size-adjust:none;">
+                              <td width="90" style="width: 9%;"></td>
+                              <td align="center">
+                                <div border="0" style="border: none; height: 60px;">
                                   <img src="https://github.com/NickSaindon/land-leasing-contact/blob/main/public/images/Remedy_Export_Logo.png?raw=true" alt="Remedy Export" width="100" height="100" border="0" style="border: none; display: block; -ms-interpolation-mode: bicubic;">
-                                </a>
+                                </div>
                               </td>
+                              <td width="90" style="width: 9%;"></td>
                             </tr>
                             <tr><td colspan="3" height="100"></td></tr>
                             <tr>
