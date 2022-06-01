@@ -173,7 +173,7 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{
                                   required: true,
-                                  pattern: /^[\u0E00-\u0E7Fa-zA-Z0-9\s]*$/
+                                  pattern: /^[\u0E00-\u0E7Fa-zA-Z0-9\/\s]*$/
                                 }}
                                 render={({ field }) => (
                                   <input 
